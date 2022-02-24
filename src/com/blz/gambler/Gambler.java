@@ -9,7 +9,6 @@ public class Gambler {
     public static final int START_DAY=1;
     public static final int DAYS_IN_MONTH=30;
     public static final int STAKES_PER_DAY=50;
-
     public static final int START_DOLLARS=0;
 
 
@@ -18,8 +17,13 @@ public class Gambler {
 
         int days = START_DAY;
         int totalDollars = START_DOLLARS;
+        int count=0;
+        int wonCount=0;
+        int lostCount=0;
+        int maxWonCount=0;
+        int maxLostCount=0;
 
-            //for a month,To know gambler's stakes each day
+        //for a month,To know gambler's stakes each day
         for (days = START_DAY; days <= DAYS_IN_MONTH; days++) {
             int totalStake = STAKE;
 
@@ -28,23 +32,32 @@ public class Gambler {
                 //initialising game value by random number
                 int luck = (int) (Math.random() * 10) % 2;
                 if (luck == 1) {
-                    totalStake = totalStake + BET; //Stake will increase as gambler wins the bet
+                    totalStake += BET; //Stake will increase as gambler wins the bet
+                    wonCount++;
+                    if(maxWonCount<wonCount){
+                        maxWonCount=wonCount;
+                    }
                 } else {
-                    totalStake = totalStake - BET; //Stake will decrease as gambler lost the bet
+                    totalStake -= BET; //Stake will decrease as gambler lost the bet
+                    lostCount++;
+                    if(maxLostCount<lostCount){
+                        maxLostCount=lostCount;
+                    }
                 }
+                count++;
             }
             if (totalStake == HIGH_LIMIT) {
                 totalDollars += STAKES_PER_DAY;
-                System.out.println("Gambler won by " +totalDollars+" dollars on day "+days);
+              System.out.println("Gambler won by " +totalDollars+" dollars on day "+days);
             } else {
                 totalDollars -= STAKES_PER_DAY;
-                System.out.println("Gambler lost by " +totalDollars+" dollars on day "+days);
+              System.out.println("Gambler lost by " +totalDollars+" dollars on day "+days);
             }
         }
         if(totalDollars>START_DOLLARS){
-            System.out.println("Gambler won " +totalDollars);
+            System.out.println("Gambler won " +totalDollars+" and luckiest "+maxWonCount+" times maximum won and and unluckiest "+maxLostCount+" times maximum lost out of "+count);
         } else {
-            System.out.println("Gambler lost " + totalDollars);
+            System.out.println("Gambler lost " + totalDollars+" and unluckiest "+maxLostCount+" times maximum lost and luckiest "+maxWonCount+" times maximum won out of "+count);
         }
     }
 }

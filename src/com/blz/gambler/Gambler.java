@@ -7,7 +7,7 @@ public class Gambler {
     public static final int HIGH_LIMIT=STAKE+PERCENTAGE_50_STAKE;
     public static final int LOW_LIMIT=STAKE-PERCENTAGE_50_STAKE;
     public static final int START_DAY=1;
-    public static final int MAX_DAY=20;
+    public static final int DAYS_IN_MONTH=30;
     public static final int STAKES_PER_DAY=50;
 
     public static final int START_DOLLARS=0;
@@ -19,8 +19,8 @@ public class Gambler {
         int days = START_DAY;
         int totalDollars = START_DOLLARS;
 
-            //for 20 days ,To know gambler's stakes each day
-        for (days = START_DAY; days <= MAX_DAY; days++) {
+            //for a month,To know gambler's stakes each day
+        for (days = START_DAY; days <= DAYS_IN_MONTH; days++) {
             int totalStake = STAKE;
 
             //Gambler should either earn 150 or loose 50

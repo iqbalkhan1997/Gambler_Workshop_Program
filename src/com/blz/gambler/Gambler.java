@@ -9,17 +9,25 @@ public class Gambler {
     public static final int START_DAY=1;
     public static final int DAYS_IN_MONTH=30;
     public static final int STAKES_PER_DAY=50;
-
     public static final int START_DOLLARS=0;
-
+    public static String checkWon="won";
 
     public static void main(String[] args) {
         System.out.println("Welcome to the Gambler Game");
-
+        while (checkWon.equals("won")) {
+            checkWon = getGame(checkWon);
+            if(checkWon.equals("lost")) {
+                System.out.println("Would like to stop Gambling");
+            } else {
+                System.out.println("Would like to Gamble again");
+            }
+        }
+    }
+    private static String getGame(String check){
         int days = START_DAY;
         int totalDollars = START_DOLLARS;
 
-            //for a month,To know gambler's stakes each day
+        //for a month,To know gambler's stakes each day
         for (days = START_DAY; days <= DAYS_IN_MONTH; days++) {
             int totalStake = STAKE;
 
@@ -41,10 +49,13 @@ public class Gambler {
                 System.out.println("Gambler lost by " +totalDollars+" dollars on day "+days);
             }
         }
-        if(totalDollars>START_DOLLARS){
+        if(totalDollars>=START_DOLLARS){
+            check="won";
             System.out.println("Gambler won " +totalDollars);
         } else {
+            check="lost";
             System.out.println("Gambler lost " + totalDollars);
         }
+        return check;
     }
 }
